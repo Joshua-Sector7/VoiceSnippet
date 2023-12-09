@@ -1,0 +1,20 @@
+{
+  "configs": [
+    {
+      "setting": "name",
+      "value": "snippet"
+    },
+    {
+      "setting": "wake",
+      "value": "wake"
+    },
+    {
+      "setting": "sleep",
+      "value": "sleep"
+    },
+    {
+      "setting": "switch",
+      "value": "switch"
+    }
+  ]
+}

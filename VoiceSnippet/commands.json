@@ -1,0 +1,201 @@
+{
+  "commands": [
+    {
+      "voice": "new line",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "RETURN"
+        }
+      ]
+    },
+    {
+      "voice": "duplicate",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "HOME"
+        },
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "CONTROL",
+          "key": "VK_C"
+        },
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "CONTROL",
+          "key": "VK_V"
+        }
+      ]
+    },
+    {
+      "voice": "page down",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "NEXT"
+        }
+      ]
+    },
+    {
+      "voice": "page up",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "PRIOR"
+        }
+      ]
+    },
+    {
+      "voice": "home",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "HOME"
+        }
+      ]
+    },
+    {
+      "voice": "end",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "END"
+        }
+      ]
+    },
+    {
+      "voice": "arrow up",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "UP"
+        }
+      ]
+    },
+    {
+      "voice": "arrow down",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "DOWN"
+        }
+      ]
+    },
+    {
+      "voice": "arrow left",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "LEFT"
+        }
+      ]
+    },
+    {
+      "voice": "arrow right",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "RIGHT"
+        }
+      ]
+    },
+    {
+      "voice": "desktop",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "LWIN",
+          "key": "VK_D"
+        }
+      ]
+    },
+    {
+      "voice": "explorer",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "LWIN",
+          "key": "VK_E"
+        }
+      ]
+    },
+    {
+      "voice": "select left",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "SHIFT",
+          "key": "HOME"
+        }
+      ]
+    },
+    {
+      "voice": "select right",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "SHIFT",
+          "key": "END"
+        }
+      ]
+    },
+    {
+      "voice": "undo",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "CONTROL",
+          "key": "VK_Z"
+        }
+      ]
+    },
+    {
+      "voice": "copy",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "CONTROL",
+          "key": "VK_C"
+        }
+      ]
+    },
+    {
+      "voice": "paste",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifier": "CONTROL",
+          "key": "VK_V"
+        }
+      ]
+    },
+    {
+      "voice": "fox 5",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "F5"
+        }
+      ]
+    },
+    {
+      "voice": "fox 10",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "F10"
+        }
+      ]
+    },
+    {
+      "voice": "sql select",
+      "actions": [
+        {
+          "action": "textEntry",
+          "text": "SELECT * FROM "
+        }
+      ]
+    }
+  ]
+}
