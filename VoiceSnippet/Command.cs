@@ -19,19 +19,26 @@ namespace VoiceSnippet {
         public class KeyAction {
             public string Action { get; set; }
             public string Key { get; set; }
-            public string Modifier { get; set; }
+            public List<string> Modifiers { get; set; }
             public string Text { get; set; }
             public KeyAction() {
                 Action = "";
                 Key = "";
-                Modifier = "";
+                Modifiers = new List<string>();
                 Text = "";
             }
             public string ToString() {
-                return "Action: " + Action + " Key: " + Key + " Modifier: " + Modifier + " Text: " + Text;
+                return "Action: " + Action + " Key: " + Key + " Modifier: " + ModifierToString() + " Text: " + Text;
+            }
+            public string ModifierToString() {
+                if(Modifiers == null || Modifiers.Count == 0) {
+                    return "";
+                } else {
+                    return string.Join(",", Modifiers);
+                }
             }
             public bool IsEmpty() {
-                return Action == "" && Key == "" && Modifier == "" && Text == "";
+                return Action == "" && Key == "" && Text == "" && (Modifiers == null || Modifiers.Count == 0);
             }
         }
 

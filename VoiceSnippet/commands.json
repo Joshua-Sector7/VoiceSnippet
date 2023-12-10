@@ -10,6 +10,25 @@
       ]
     },
     {
+      "voice": "escape",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "ESCAPE"
+        }
+      ]
+    },
+    {
+      "voice": "execute",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifiers": [ "CONTROL", "SHIFT" ],
+          "key": "VK_E"
+        }
+      ]
+    },
+    {
       "voice": "duplicate",
       "actions": [
         {
@@ -18,12 +37,12 @@
         },
         {
           "action": "modifiedKeyStroke",
-          "modifier": "CONTROL",
+          "modifiers": [ "CONTROL" ],
           "key": "VK_C"
         },
         {
           "action": "modifiedKeyStroke",
-          "modifier": "CONTROL",
+          "modifiers": [ "CONTROL" ],
           "key": "VK_V"
         }
       ]
@@ -105,7 +124,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "LWIN",
+          "modifiers": [ "LWIN" ],
           "key": "VK_D"
         }
       ]
@@ -115,7 +134,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "LWIN",
+          "modifiers": [ "LWIN" ],
           "key": "VK_E"
         }
       ]
@@ -125,7 +144,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "SHIFT",
+          "modifiers": [ "SHIFT" ],
           "key": "HOME"
         }
       ]
@@ -135,7 +154,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "SHIFT",
+          "modifiers": [ "SHIFT" ],
           "key": "END"
         }
       ]
@@ -145,7 +164,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "CONTROL",
+          "modifiers": [ "CONTROL" ],
           "key": "VK_Z"
         }
       ]
@@ -155,7 +174,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "CONTROL",
+          "modifiers": [ "CONTROL" ],
           "key": "VK_C"
         }
       ]
@@ -165,7 +184,7 @@
       "actions": [
         {
           "action": "modifiedKeyStroke",
-          "modifier": "CONTROL",
+          "modifiers": [ "CONTROL" ],
           "key": "VK_V"
         }
       ]

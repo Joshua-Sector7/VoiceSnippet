@@ -89,9 +89,23 @@ namespace VoiceSnippet {
                             break;
 
                         case "modifiedKeyStroke":
-                            InSim.Keyboard.ModifiedKeyStroke(
-                                (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), action.Modifier),
-                                (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), action.Key));
+                            // Assuming 'action' is the current action being processed
+                            // and it has a 'List<string> Modifiers' and a 'string Key'
+
+                            List<VirtualKeyCode> modifierKeys = action.Modifiers
+                                .Select(modifier => (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), modifier))
+                                .ToList();
+
+                            VirtualKeyCode mainKey = (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), action.Key);
+
+                            // Now apply the modifiers and the main key
+                            // This approach assumes that you have modified the InSim.Keyboard.ModifiedKeyStroke 
+                            // method to accept a list of modifiers
+                            InSim.Keyboard.ModifiedKeyStroke(modifierKeys, mainKey);
+
+                            //InSim.Keyboard.ModifiedKeyStroke(
+                            //    (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), action.Modifier),
+                            //    (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), action.Key));
                             break;
 
                         case "textEntry":
@@ -110,6 +124,7 @@ namespace VoiceSnippet {
 
         private static void Recognizer_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e) {
             Console.WriteLine("Recognition completed.");
+            //InSim.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
         }
 
         private static bool ReadCommands() {
@@ -135,6 +150,13 @@ namespace VoiceSnippet {
                         if (c.Actions[i].IsEmpty()) {
                             Console.WriteLine($"Command {c.Voice} action {i+1} invalid");
                             badFile = true;
+                        } else {
+                            if (c.Actions[i].Action == "modifiedKeyStroke") {
+                                if (c.Actions[i].Modifiers == null || c.Actions[i].Modifiers.Count == 0) {
+                                    Console.WriteLine($"Command {c.Voice} action {i + 1} missing modifier");
+                                    badFile = true;
+                                }
+                            }
                         }
                     }
                 }
@@ -160,7 +182,7 @@ namespace VoiceSnippet {
         private static void PrintCommands() {
             foreach (Command c in CmdHolder.Commands) {
                 foreach(Command.KeyAction ka in c.Actions) {
-                    Console.WriteLine($"Command: {c.Voice} = {ka.Action} {ka.Key} {ka.Modifier} {ka.Text}");
+                    Console.WriteLine($"Command: {c.Voice} {ka.ToString()}");
                 }
             }
         }
