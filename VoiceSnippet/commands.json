@@ -66,7 +66,7 @@
       ]
     },
     {
-      "voice": "home",
+      "voice": "line start",
       "actions": [
         {
           "action": "keyPress",
@@ -75,7 +75,7 @@
       ]
     },
     {
-      "voice": "end",
+      "voice": "line end",
       "actions": [
         {
           "action": "keyPress",
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "voice": "desktop",
+      "voice": "go desktop",
       "actions": [
         {
           "action": "modifiedKeyStroke",
@@ -130,12 +130,52 @@
       ]
     },
     {
-      "voice": "explorer",
+      "voice": "file end",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifiers": [ "CONTROL" ],
+          "key": "END"
+        }
+      ]
+    },
+    {
+      "voice": "file start",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifiers": [ "CONTROL" ],
+          "key": "HOME"
+        }
+      ]
+    },
+    {
+      "voice": "open explorer",
       "actions": [
         {
           "action": "modifiedKeyStroke",
           "modifiers": [ "LWIN" ],
           "key": "VK_E"
+        }
+      ]
+    },
+    {
+      "voice": "save file",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifiers": [ "CONTROL" ],
+          "key": "VK_S"
+        }
+      ]
+    },
+    {
+      "voice": "screenshot",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke",
+          "modifiers": [ "SHIFT", "LWIN" ],
+          "key": "VK_S"
         }
       ]
     },
@@ -160,7 +200,7 @@
       ]
     },
     {
-      "voice": "undo",
+      "voice": "undo that",
       "actions": [
         {
           "action": "modifiedKeyStroke",
@@ -170,7 +210,7 @@
       ]
     },
     {
-      "voice": "copy",
+      "voice": "copy that",
       "actions": [
         {
           "action": "modifiedKeyStroke",
@@ -180,12 +220,22 @@
       ]
     },
     {
-      "voice": "paste",
+      "voice": "paste that",
       "actions": [
         {
           "action": "modifiedKeyStroke",
           "modifiers": [ "CONTROL" ],
           "key": "VK_V"
+        }
+      ]
+    },
+    {
+      "voice": "stop debugging",
+      "actions": [
+        {
+          "action": "modifiedKeyStroke", 
+          "modifiers": [ "SHIFT" ],
+          "key": "F5"
         }
       ]
     },

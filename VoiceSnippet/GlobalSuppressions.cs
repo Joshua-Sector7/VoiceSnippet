@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>", Scope = "member", Target = "~M:VoiceSnippet.Program.Main(System.String[])")]
+[assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>", Scope = "member", Target = "~M:VoiceSnippet.Program.Recognizer_SpeechRecognized(System.Object,System.Speech.Recognition.SpeechRecognizedEventArgs)")]

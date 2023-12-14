@@ -1,4 +1,5 @@
 ﻿using System.Speech.Recognition;
+using System.Speech.Synthesis;
 using Newtonsoft.Json;
 using WindowsInput;
 using WindowsInput.Native;
@@ -10,6 +11,9 @@ namespace VoiceSnippet {
         private static List<string> RequiredConfigs = new List<string> { "NAME", "WAKE", "SLEEP", "SWITCH" };
         private static Config.ConfigHolder CfgHolder = new Config.ConfigHolder();
         private static Command.CommandHolder CmdHolder = new Command.CommandHolder();
+        private static SpeechSynthesizer Synth = new SpeechSynthesizer();
+        private static SpeechRecognitionEngine recognizer;
+        private static bool KeepAlive = true;
 
         //private static Command.CommandHolder CmdHolder = new Command.CommandHolder();
         private static InputSimulator InSim = new InputSimulator();
@@ -28,7 +32,14 @@ namespace VoiceSnippet {
 
             Console.WriteLine($"Total commads found {VoiceCommands.Count}");
 
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+            foreach (InstalledVoice voice in Synth.GetInstalledVoices()) {
+                VoiceInfo info = voice.VoiceInfo;
+                Console.WriteLine("Voice Name: " + info.Name);
+            }
+
+            Synth.SelectVoice("Microsoft Zira Desktop");
+            Synth.Speak("Hello, my name is Zira");
+            recognizer = new SpeechRecognitionEngine();
 
             // Define the wake words
             Choices voiceLibrary = new Choices(VoiceCommands.ToArray());
@@ -54,15 +65,24 @@ namespace VoiceSnippet {
             // Start asynchronous recognition
             recognizer.RecognizeAsync(RecognizeMode.Multiple);
 
-            Console.WriteLine("Press any key to exit...");
+            Console.WriteLine("Press any key to exit... 3");
             Console.ReadKey();
+            Console.WriteLine("Press any key to exit... 2");
+            Console.ReadKey();
+            Console.WriteLine("Press any key to exit... 1");
+            Console.ReadKey();
+
+            KeepAlive = false;
 
             // Stop recognition
             recognizer.RecognizeAsyncStop();
         }
 
         private static void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e) {
-            Console.WriteLine($"Recognized text: {e.Result.Text}");
+            DateTime dt = DateTime.Now;
+            Console.WriteLine($"{dt.ToString()}: Recognized text: {e.Result.Text}");
+            //Synth.Speak(e.Result.Text);
+            Synth.SpeakAsync(e.Result.Text);
             ExecuteCommand(GetCommand(e.Result.Text));
         }
 
@@ -123,8 +143,16 @@ namespace VoiceSnippet {
         }
 
         private static void Recognizer_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e) {
-            Console.WriteLine("Recognition completed.");
-            //InSim.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
+            DateTime dt = DateTime.Now;
+
+            Console.WriteLine($"{dt.ToString()}: Recognition completed.");
+
+            if (KeepAlive) {
+                Synth.SpeakAsync("Timeout, restarting");
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);
+            } else {
+                Synth.Speak("Goodbye");
+            }
         }
 
         private static bool ReadCommands() {
