@@ -6,9 +6,9 @@ using WindowsInput.Native;
 
 namespace VoiceSnippet {
     public class Program {
-        private static string configFile = "configs.json";
+        //private static string configFile = "configs.json";
         private static string commandFile = "commands.json";
-        private static List<string> RequiredConfigs = new List<string> { "NAME", "WAKE", "SLEEP", "SWITCH" };
+        //private static List<string> RequiredConfigs = new List<string> { "NAME", "WAKE", "SLEEP", "SWITCH" };
         private static Config.ConfigHolder CfgHolder = new Config.ConfigHolder();
         private static Command.CommandHolder CmdHolder = new Command.CommandHolder();
         private static SpeechSynthesizer Synth = new SpeechSynthesizer();
@@ -20,15 +20,20 @@ namespace VoiceSnippet {
         private static List<string> VoiceCommands = new List<string>();
         //private static CommandMap CmdMap = new CommandMap();
         static void Main(string[] args) {
-            if (!ReadConfigs()) {
+            List<string> temp = new List<string>();
+            if (!Config.ReadConfigs(out CfgHolder, out temp)) {
+                Print(temp);
                 return;
             }
-            PrintConfigs();
+            Print(Config.PrintConfigs(CfgHolder));
 
             if (!ReadCommands()) {
                 return;
             }
             PrintCommands();
+
+            VoiceCommands.Add(Config.GetWakePhrase(CfgHolder));
+            VoiceCommands.Add(Config.GetSleepPhrase(CfgHolder));
 
             Console.WriteLine($"Total commads found {VoiceCommands.Count}");
 
@@ -83,7 +88,14 @@ namespace VoiceSnippet {
             Console.WriteLine($"{dt.ToString()}: Recognized text: {e.Result.Text}");
             //Synth.Speak(e.Result.Text);
             Synth.SpeakAsync(e.Result.Text);
-            ExecuteCommand(GetCommand(e.Result.Text));
+
+            if(Config.IsWakePhrase(e.Result.Text, CfgHolder)) {
+                Synth.SpeakAsync("wake");
+            } else if (Config.IsSleepPhrase(e.Result.Text, CfgHolder)) {
+                Synth.SpeakAsync("sleep");
+            } else {
+                ExecuteCommand(GetCommand(e.Result.Text));
+            }
         }
 
         private static Command GetCommand(string commandVoice) {
@@ -214,30 +226,9 @@ namespace VoiceSnippet {
                 }
             }
         }
-
-        private static bool ReadConfigs() {
-            string json = File.ReadAllText(configFile);
-            Config.ConfigHolder configHolder = JsonConvert.DeserializeObject<Config.ConfigHolder>(json);
-
-            if (configHolder == null || configHolder.Configs == null || configHolder.Configs.Count == 0) {
-                Console.WriteLine($"Unable to load {configFile} or it was empty");
-                return false;
-            }
-
-            foreach (string s in RequiredConfigs) {
-                if (!configHolder.Configs.Any(c => c.Setting.ToUpper() == s)) {
-                    Console.WriteLine($"Required config {s} not found");
-                    return false;
-                }
-            }
-
-            CfgHolder = configHolder;
-            return true;
-        }
-
-        private static void PrintConfigs() {
-            foreach (Config c in CfgHolder.Configs) {
-                Console.WriteLine($"Config: {c.Setting} = {c.Value}");
+        private static void Print(List<string> data) {
+            foreach (string s in data) {
+                Console.WriteLine(s);
             }
         }
     }
