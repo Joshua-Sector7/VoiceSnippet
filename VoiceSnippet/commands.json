@@ -1,6 +1,15 @@
 {
   "commands": [
     {
+      "voice": "backspace",
+      "actions": [
+        {
+          "action": "keyPress",
+          "key": "BACK"
+        }
+      ]
+    },
+    {
       "voice": "new line",
       "actions": [
         {
@@ -233,7 +242,7 @@
       "voice": "stop debugging",
       "actions": [
         {
-          "action": "modifiedKeyStroke", 
+          "action": "modifiedKeyStroke",
           "modifiers": [ "SHIFT" ],
           "key": "F5"
         }
@@ -263,6 +272,15 @@
         {
           "action": "textEntry",
           "text": "SELECT * FROM "
+        }
+      ]
+    },
+    {
+      "voice": "sql transaction",
+      "actions": [
+        {
+          "action": "textEntry",
+          "text": "BEGIN TRANSACTION\nROLLBACK"
         }
       ]
     }

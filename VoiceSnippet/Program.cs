@@ -141,7 +141,8 @@ namespace VoiceSnippet {
                             break;
 
                         case "textEntry":
-                            InSim.Keyboard.TextEntry(action.Text);
+                            //InSim.Keyboard.TextEntry(action.Text);
+                            HandleTextEntry(action.Text);
                             break;
                     }
                 }
@@ -153,6 +154,18 @@ namespace VoiceSnippet {
                 }
             }
         }
+
+        private static void HandleTextEntry(string text) {
+            if (text.Contains("\n")) {
+                string[] strings = text.Split("\n");
+                foreach(string s in strings) {
+                    InSim.Keyboard.TextEntry(s);
+                    InSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                }
+            } else {
+                InSim.Keyboard.TextEntry(text);
+            }
+        }   
 
         private static void Recognizer_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e) {
             DateTime dt = DateTime.Now;
